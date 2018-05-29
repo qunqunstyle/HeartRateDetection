@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_camera"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_back"
+    tools:context="com.example.heartratedect.Activity.CameraActivity">
+
+    <com.example.heartratedect.MySurfaceView
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="-30dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/camera_mysurfaceview"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+       android:background="@drawable/circle"/>
+
+    <com.example.heartratedect.CameraProgressBar
+        android:id="@+id/camera_ProgressBar"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <!--<TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="计时区域"
+        android:textColor="#fff"
+        android:id="@+id/camera_time"/>-->
+    <LinearLayout
+        android:id="@+id/text1"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/camera_mysurfaceview">
+
+        <TextView
+            android:id="@+id/Prompt"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:text="请点击圆框开始"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#fff"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/camera_mysurfaceview">
+        <TextView
+            android:id="@+id/HeartRateShow"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="70"
+            android:textSize="90dp"
+            android:gravity="center"
+            android:textColor="#fff"/>
+        <TextView
+            android:id="@+id/show"
+
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:text="次/秒"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/shishi"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="查看分析结果"
+        android:visibility="invisible" />
+
+</RelativeLayout>
