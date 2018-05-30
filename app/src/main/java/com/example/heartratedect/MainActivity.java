@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.example.heartratedect.Activity.BaseActivity;
 import com.example.heartratedect.Activity.CameraActivity;
-import com.example.heartratedect.Activity.Tab_Date_Fragment;
+import com.example.heartratedect.Activity.Tab_Data_Fragment;
 import com.example.heartratedect.Activity.Tab_Setting_Fragment;
 
 import java.util.ArrayList;
