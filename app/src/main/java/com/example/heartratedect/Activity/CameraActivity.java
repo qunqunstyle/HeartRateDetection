@@ -173,13 +173,6 @@ public class CameraActivity extends Fragment {
                     camera.setPreviewDisplay(holder);
                     isPreview = true;
                     camera.startPreview();
-                    if (null == mediaRecorder) {
-                        mediaRecorder = new MediaRecorder();
-                    } else {
-                        mediaRecorder.reset();
-                    }
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -453,4 +446,3 @@ public class CameraActivity extends Fragment {
         }
     }
 }
-//debug for crash in return from the result page and click the surfaceView
