@@ -455,16 +455,16 @@ public class CameraActivity extends Fragment {
         float Dates[] = {89.25f,45.36f,78.78f};
         String content =null;
         // 测试视频的地址：/storage/emulated/0/HeartRateDect/video/SucessVideo/videoMJPG.avi
-        FormatUtil.Videopath = FormatUtil.videopath + FormatUtil.videoName;
-        Log.d("TRANSCODEC","videopath"+FormatUtil.Videopath);
-        heartRate = (int)FormatUtil.stringFromJNI(FormatUtil.Videopath);
+        FormatUtil.videoPath = FormatUtil.videoPath + FormatUtil.videoName;
+        Log.d("TRANSCODEC","videopath"+FormatUtil.videoPath);
+        heartRate = (int)FormatUtil.stringFromJNI(FormatUtil.videoPath);
         content =Float.toString(Dates[0])+",";
         for(int i=1;i<Dates.length;i++){
             content += Float.toString(Dates[i])+",";
         }
         Log.i(tag, "content:  " +content);
         writeTxtToFile(Dates,content);
-        deleteFile(FormatUtil.Videopath);
+        deleteFile(FormatUtil.videoPath);
         Log.i(tag, "date: "+heartRate);
         completeHRD = true;
 

@@ -59,10 +59,4 @@ public class Tab_Data_Fragment extends Fragment {
         heartdateshow.setText(data);*/
         return DateLayout;
     }
-
-
-
-
-
-
 }
