@@ -29,57 +29,47 @@ public class FormatUtil {
     }
 
     public static native float stringFromJNI(String video);
-    public static String videopath;
+    public static String videoPath;
     private static String Tag = "FormatUtil";
     public static String videoName;
-    public static String Videopath;
-    private static String datepath;
-    private static String datename;
+    private static String dataPath;
+    private static String dataName;
 
     private static final int MSG_PROGRESS_UPDATE = 0x110;
     //文件存贮
     public static  void videoRename(File recAudioFile) {
 
-        videopath = Environment.getExternalStorageDirectory()
-        .getAbsolutePath()+  "/HeartRateDect/video/"+ "SucessVideo" + "/";
+        videoPath = Environment.getExternalStorageDirectory()
+                .getAbsolutePath()+  "/HeartRateDect/video/"+ "SucessVideo" + "/";
         videoName = new SimpleDateFormat("yyyyMMddHHmmss")
-        .format(new Date()) + ".avi";
-        File out = new File(videopath);
+                .format(new Date()) + ".avi";
+        File out = new File(videoPath);
         if (!out.exists()){
             out.mkdirs();
-            }
-        out = new File(videopath, videoName);
+        }
+        out = new File(videoPath, videoName);
         if(recAudioFile.exists())
-        recAudioFile.renameTo(out);
-        }
+            recAudioFile.renameTo(out);
+    }
 
-    //计时器 一位补位
-     public static String format(int num){
-        String s = num + "";
-        if (s.length() == 1) {
-            s = "0" + s;
-            }
-        return s;
-        }
 
-    /*  The most important method to compute
-     the heartrate and return the value*/
+
     public static int GetRate(){
-       // String Videopath;
+        // String videoPath;
         int heartRate = 0;
         float Dates[] = {89.25f,45.36f,78.78f};
         String content =null;
         // 测试视频的地址：/storage/emulated/0/HeartRateDect/video/SucessVideo/videoMJPG.avi
-        Videopath = videopath + videoName;
-        Log.d("TRANSCODEC","videopath"+Videopath);
-        heartRate = (int)stringFromJNI(Videopath);
+        videoPath = videoPath + videoName;
+        Log.d("TRANSCODEC","videoPath"+videoPath);
+        heartRate = (int)stringFromJNI(videoPath);
         content =Float.toString(Dates[0])+",";
         for(int i=1;i<Dates.length;i++){
             content += Float.toString(Dates[i])+",";
         }
         Log.i(Tag, "content:  " +content);
         writeTxtToFile(Dates,content);
-        deleteFile(Videopath);
+        deleteFile(videoPath);
         Log.i(Tag, "date: "+heartRate);
         return heartRate;
 
@@ -87,15 +77,15 @@ public class FormatUtil {
 
     public static void writeTxtToFile(float date[],String strcontent ){
 
-        datepath = Environment.getExternalStorageDirectory()
+        dataPath= Environment.getExternalStorageDirectory()
                 .getAbsolutePath()+  "/HeartRateDect/"+"date"+"/" ;
-        datename = "date.txt";
+        dataName = "date.txt";
         String strContent = strcontent +"              "+new SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss").format(new Date())+ "\r\n";
         try{
-            File file = new File(datepath,datename);
+            File file = new File(dataPath,dataName);
             if (!file.exists()) {
 
-                Log.d("TestFile", "Create the file:" + datepath);
+                Log.d("TestFile", "Create the file:" + dataPath);
                 file.getParentFile().mkdir();
                 file.createNewFile();
                 System.out.println(file.createNewFile());
@@ -109,21 +99,6 @@ public class FormatUtil {
             Log.e("File","Error on write File:"+ e);
         }
     }
-  /*  public File makeFilePath(String datepath) {
-        File file = null;
-
-        try {
-            file = new File(datepath);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
-*/
-
     /**
      * 删除单个文件
      * @param   filePath    被删除文件的文件名
