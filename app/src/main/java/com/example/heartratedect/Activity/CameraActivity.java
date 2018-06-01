@@ -208,7 +208,7 @@ public class CameraActivity extends Fragment {
                 shishi.setVisibility(View.INVISIBLE);
                 mTimeHandler1.removeMessages(0);
                 mTimeHandler2.removeMessages(0);
-                isRecording = true;
+                //isRecording = true;
                 heartRateValue = 0;
                 HeartRateShow.setVisibility(View.INVISIBLE);
                 show.setVisibility(View.INVISIBLE);
@@ -369,10 +369,10 @@ public class CameraActivity extends Fragment {
     }
     private void endRecord() {
         //反正多次进入，比如surface的destroy和界面onPause
-        if (!isRecording) {
+      /*  if (!isRecording) {
             return;
         }
-        isRecording = false;
+        isRecording = false;*/
         try {
             if (mediaRecorder != null) {
                 mediaRecorder.stop();
