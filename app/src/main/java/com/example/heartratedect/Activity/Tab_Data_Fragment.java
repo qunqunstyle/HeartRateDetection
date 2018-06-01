@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.heartratedect.R;
 
-public class Tab_Date_Fragment extends Fragment {
+public class Tab_Data_Fragment extends Fragment {
 
     /*private RelativeLayout wave;
     private RelativeLayout heartdate;*/
@@ -28,7 +28,7 @@ public class Tab_Date_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View DateLayout = inflater.inflate(R.layout.tab_date, container,
+        View DateLayout = inflater.inflate(R.layout.tab_data, container,
                 false);
        /* wave = (RelativeLayout) DateLayout.findViewById(R.id.wave);
         heartdate = (RelativeLayout)DateLayout.findViewById(R.id.heartdate) ;*/
@@ -59,10 +59,4 @@ public class Tab_Date_Fragment extends Fragment {
         heartdateshow.setText(data);*/
         return DateLayout;
     }
-
-
-
-
-
-
 }
