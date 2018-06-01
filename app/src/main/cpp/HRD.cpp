@@ -137,7 +137,6 @@ void HRD::caculateHRValue(){
 		avg_sum = sum / (rowsNum*colsNum);
 		perFrame_BVP[k] = avg_sum;
 	}
-
 	heartRate = IFE_Detecting(perFrame_BVP, fps, 500, LENGTH);
 }
 
