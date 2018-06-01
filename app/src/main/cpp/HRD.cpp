@@ -12,7 +12,7 @@ HRD::HRD(){
 	
 	levels = 4;
 	fl = 2.0f;
-	fh = 2.6f;
+	fh = 3.0f;
 	fps = 25.0f;
 	heartRate = 0.0f;
 	LENGTH = MAX_LENGTH;
