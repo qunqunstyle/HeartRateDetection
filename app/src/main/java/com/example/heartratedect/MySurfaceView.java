@@ -19,6 +19,7 @@ import android.view.SurfaceView;
 public class MySurfaceView extends SurfaceView {
 
     private Paint paint;
+    private int widthSize;
     private Camera camera;
     private int height; // 圆的半径
 
@@ -51,11 +52,17 @@ public class MySurfaceView extends SurfaceView {
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        height=widthSize;
-        Log.e("onMeasure", "draw: widthMeasureSpec = " +widthSize + "  heightMeasureSpec = " + heightSize);
-        setMeasuredDimension(widthSize, heightSize);
+         widthSize = MeasureSpec.getSize(widthMeasureSpec);
+      //  int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int screenWidth = CommonUtils.getScreenWidth(getContext());
+        int screenHeight = CommonUtils.getScreenHeight(getContext());
+        height=600;
+        double screenWidth1= 0.55*screenWidth;
+        double screenHeight1= 0.55*screenHeight;
+        Log.e("onMeasure", "widthSize="+widthSize);
+        Log.e("onMeasure", "draw: widthMeasureSpec = " +screenWidth + "  heightMeasureSpec = " + screenHeight);
+        setMeasuredDimension((int) screenWidth1, (int) screenHeight1);
+        //setMeasuredDimension(widthSize, heightSize);
 
 
 
@@ -69,7 +76,7 @@ public class MySurfaceView extends SurfaceView {
       /*  mpaint.setColor(white);
         mpaint.setStrokeWidth(50);
         canvas.drawCircle(height / 2, height / 2, height / 2,mpaint );*/
-        path.addCircle(height / 2, height / 2, height / 2, Path.Direction.CCW);
+        path.addCircle(widthSize / 2, height / 2, height / 2, Path.Direction.CCW);
         canvas.clipPath(path, Region.Op.REPLACE);
         super.draw(canvas);
     }
@@ -82,8 +89,13 @@ public class MySurfaceView extends SurfaceView {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        w = 640;
-        h = 480;
+
+        int screenWidth = CommonUtils.getScreenWidth(getContext());
+        int screenHeight = CommonUtils.getScreenHeight(getContext());
+        Log.d("screenWidth",Integer.toString(screenWidth));
+        Log.d("screenHeight",Integer.toString(screenHeight));
+        w = screenWidth;
+        h = screenHeight;
         super.onSizeChanged(w, h, oldw, oldh);
 
     }
