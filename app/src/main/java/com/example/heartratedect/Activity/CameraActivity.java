@@ -42,6 +42,7 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
+import static com.example.heartratedect.FormatUtil.MAX_LENGTH;
 import static com.example.heartratedect.FormatUtil.deleteFile;
 import static com.example.heartratedect.FormatUtil.writeTxtToFile;
 
@@ -67,9 +68,9 @@ public class CameraActivity extends Fragment {
     }
 
 
-    private static String tag = "CameraActivity";
+    private final static String TAG_CAMERA_ACTIVITY = "CameraActivity";
     private SurfaceHolder surfaceHolder;
-    private Button shishi;
+    private Button testButton;
     private Camera camera;
     private CameraProgressBar mProgressbar;
     private Camera.Parameters mParams;
@@ -77,30 +78,27 @@ public class CameraActivity extends Fragment {
     protected boolean isPreview = false;             //摄像区域是否准备良好  
     private boolean isRecording = true;           // true表示没有录像，点击开始；false表示正在录像，点击暂停  
 
-    private File mRecVedioPath;
+    private File mRecVideoPath;
     private File mRecAudioFile;
     private MySurfaceView surfaceView;
     private SurfaceHolder cameraSurfaceHolder;
     private static volatile int heartRateValue;
     private static TextView Prompt;
     private TextView show;
-    private String HeartRate = "0";      //心率值
+    private String heartRate = "0";      //心率值
     private static volatile boolean completeHRD = false;
-    private TextView HeartRateShow; //心率显示框
+    private TextView heartRateLabel; //心率显示框
     private static CustomProgressDialog dialog;
     private static Handler mTimeHandler1;
     private static Handler mTimeHandler2;
-    /**
-     * 最长录制时间
-     */
+    private static float data[] = new float[MAX_LENGTH];
     private static final int MAX_RECORD_TIME = 10 * 1000;
-    /**
-     * 刷新进度的间隔时间
-     */
     private static final int PLUSH_PROGRESS = 100;
     private final int max = MAX_RECORD_TIME / PLUSH_PROGRESS;
 
-
+    public static float[] getData() {
+        return data;
+    }
     public View onCreateView(final LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
         mTimeHandler1 = new Handler() {
@@ -114,26 +112,20 @@ public class CameraActivity extends Fragment {
                 }
             }
         };
-
         mTimeHandler2 = new Handler() {
             @Override
             public void handleMessage(android.os.Message msg) {
                 super.handleMessage(msg);
-
                 if (msg.what == 0) {
                     System.out.println("heartRateValue = "+heartRateValue);
                     if(heartRateValue!=0){
                         Prompt.setVisibility(View.INVISIBLE);
-                        HeartRateShow.setVisibility(View.VISIBLE);
-                        System.out.println("222222222222222222222");
+                        heartRateLabel.setVisibility(View.VISIBLE);
                         show.setVisibility(View.VISIBLE);
-                        HeartRateShow.setText(HeartRate);
-                        shishi.setVisibility(View.VISIBLE);
-
+                        heartRateLabel.setText(heartRate);
+                        testButton.setVisibility(View.VISIBLE);
                     }
                     sendEmptyMessageDelayed(0,0);
-
-
                 }
             }
         };
@@ -142,16 +134,16 @@ public class CameraActivity extends Fragment {
         final Handler handler = new Handler();
         final View CameraLayout = inflater.inflate(R.layout.activity_camera,container,false);
         surfaceView = null;
-        mRecVedioPath = new File(Environment.getExternalStorageDirectory()
+        mRecVideoPath = new File(Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + "/HeartRateDect/video/ErrorVideo/");
-        if (!mRecVedioPath.exists()) {
-            mRecVedioPath.mkdirs();
+        if (!mRecVideoPath.exists()) {
+            mRecVideoPath.mkdirs();
         }
-        shishi = (Button)CameraLayout.findViewById(R.id.shishi);
-        shishi.setOnClickListener(new MyListener());
+        testButton = (Button)CameraLayout.findViewById(R.id.testButton);
+        testButton.setOnClickListener(new MyListener());
         mProgressbar = (CameraProgressBar)CameraLayout.findViewById(R.id.camera_ProgressBar);
-        HeartRateShow = (TextView)CameraLayout. findViewById(R.id.HeartRateShow);
-        HeartRateShow.setVisibility(View.INVISIBLE);
+        heartRateLabel = (TextView)CameraLayout. findViewById(R.id.heartRateLabel);
+        heartRateLabel.setVisibility(View.INVISIBLE);
         Prompt = (TextView)CameraLayout.findViewById(R.id.Prompt);
         show = (TextView)CameraLayout.findViewById(R.id.show);
         show.setVisibility(View.INVISIBLE);
@@ -163,26 +155,21 @@ public class CameraActivity extends Fragment {
         surfaceView = (MySurfaceView)CameraLayout. findViewById(R.id.camera_mysurfaceview);
         cameraSurfaceHolder = surfaceView.getHolder();
         cameraSurfaceHolder.addCallback(new SurfaceHolder.Callback() {
-
-
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
                     initView();
-                    System.out.println("surfaceview 创建");
                     camera.setPreviewDisplay(holder);
                     isPreview = true;
                     camera.startPreview();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //surfaceHolder = holder;
                 cameraSurfaceHolder = holder;
             }
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-                //surfaceHolder = holder;
                 cameraSurfaceHolder = holder;
             }
 
@@ -190,27 +177,19 @@ public class CameraActivity extends Fragment {
             public void surfaceDestroyed(SurfaceHolder holder) {
                 endRecord();
                 releaseCamera();
-                System.out.println("surfaceview 销毁");
-                //getActivity().finish();
             }
         });
-        //开发时建议设置  
         // This method was deprecated in API level 11. this is ignored, this value is set automatically when needed.   
         cameraSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         surfaceView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* isSupportRecord = true;
-                cameraManager.setCameraType(1);
-                rl_camera.setVisibility(View.GONE);
-                recorderPath = FileUtils.getUploadVideoFile(mContext);*/
-                //cameraManager.startMediaRecord(recorderPath);
-                shishi.setVisibility(View.INVISIBLE);
+                testButton.setVisibility(View.INVISIBLE);
                 mTimeHandler1.removeMessages(0);
                 mTimeHandler2.removeMessages(0);
                 isRecording = true;
                 heartRateValue = 0;
-                HeartRateShow.setVisibility(View.INVISIBLE);
+                heartRateLabel.setVisibility(View.INVISIBLE);
                 show.setVisibility(View.INVISIBLE);
                 Prompt.setVisibility(View.VISIBLE);
                 Prompt.setText("正在录制...");
@@ -230,50 +209,41 @@ public class CameraActivity extends Fragment {
                     } else {
                         mediaRecorder.reset();
                     }
-                    //  HeartRateShow.setText("Heart Rate");
+
                     camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
                     camera.setDisplayOrientation(90);
                     camera.enableShutterSound(false);
                     Camera.Parameters parameters = camera.getParameters();
-                    parameters.setPreviewFrameRate(30);// 每秒30帧  
+                    parameters.setPreviewFrameRate(25);
                     camera.setParameters(parameters);
                     camera.unlock();
                     mediaRecorder.setCamera(camera);
                     mediaRecorder.setOrientationHint(270);
-                   // mediaRecorder.setPreviewDisplay(surfaceHolder.getSurface());
                     mediaRecorder.setPreviewDisplay(cameraSurfaceHolder.getSurface());
                     mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-                    //设置相机参数配置
+                    //
                     mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
                     mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
                     mediaRecorder.setVideoSize(640, 480);
 
-                    // 设置要捕获的视频帧速率 
-                    // mediaRecorder.setVideoFrameRate(25);
-                    //帧率设置易出大问题，不设置
-                    Log.i(tag, "mediaRecorder set sucess");
+                    Log.i(TAG_CAMERA_ACTIVITY, "mediaRecorder set sucess");
 
                     try {
-                        mRecAudioFile = File.createTempFile("Vedio", ".avi", mRecVedioPath);
+                        mRecAudioFile = File.createTempFile("Vedio", ".avi", mRecVideoPath);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Log.i(tag, "..." + mRecAudioFile.getAbsolutePath());
+                    Log.i(TAG_CAMERA_ACTIVITY, "..." + mRecAudioFile.getAbsolutePath());
                     mediaRecorder.setOutputFile(mRecAudioFile.getAbsolutePath());
                     try {
                         mediaRecorder.prepare();
-                        // handler1.postDelayed(task, 1000);
                         mediaRecorder.start();
-                        System.out.println("7777777777777777");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    System.out.println("666666666666666666666666");
                     isRecording = !isRecording;
-                    Log.i(tag, "=====开始录制视频=====");
+                    Log.i(TAG_CAMERA_ACTIVITY, "=====开始录制视频=====");
                 }
-                //progressSubscription =
-                System.out.println("5555555555555555555555555");
 
                 Observable.interval(100,
                         TimeUnit.MILLISECONDS,
@@ -285,14 +255,11 @@ public class CameraActivity extends Fragment {
 
                         mediaRecorder.stop();
                         mediaRecorder.reset();
-                        System.out.println("3333333333333333333333333");
                         mediaRecorder.release();
                         mediaRecorder = null;
-                        //Prompt.setText("正在计算中...");
 
-                        //CameraLayout.postInvalidate();
                         FormatUtil.videoRename(mRecAudioFile);
-                        Log.e(tag, "=====录制完成，已保存=====");
+                        Log.e(TAG_CAMERA_ACTIVITY, "=====录制完成，已保存=====");
                         isRecording = !isRecording;
 
                         mTimeHandler1.sendEmptyMessageDelayed(0,0);
@@ -300,17 +267,14 @@ public class CameraActivity extends Fragment {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                heartRateValue = GetRate();
-                                HeartRate = Integer.toString(heartRateValue);
+                                heartRateValue = getHeartRateValue();
+                                heartRate= Integer.toString(heartRateValue);
+                                Log.d(TAG_CAMERA_ACTIVITY,"HeartRateValue = "+heartRate);
                             }
                         }).start();
-
                         mTimeHandler2.sendEmptyMessageDelayed(0,0);
-
                         mProgressbar.reset();
-                        System.out.println("444444444444444444444444444444444");
                     }
-
 
                     @Override
                     public void onError(Throwable e) {
@@ -327,24 +291,18 @@ public class CameraActivity extends Fragment {
             }
 
         });
-
-        //mTimeHandler.sendEmptyMessageDelayed(0, 1000);
-
         return CameraLayout;
-
-
     }
 
-
     private void initView(){
-        //初始化摄像头  
+        // 初始化摄像头  
         camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
         Camera.Parameters parameters = camera.getParameters();
-        parameters.setPreviewFrameRate(30);// 每秒30帧  
+        // 每秒30帧  
+        parameters.setPreviewFrameRate(30);
         camera.setParameters(parameters);
         camera.setDisplayOrientation(90);
     }
-
 
     public void stop(){
         if (mediaRecorder != null) {
@@ -407,41 +365,40 @@ public class CameraActivity extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-
     }
 
-    public static int GetRate(){
-        // String Videopath;
-        //Prompt.setText("正在计算中...");
-        System.out.println("123456789456122639");
+    public static int getHeartRateValue(){
         int heartRate = 0;
-        float Dates[] = {89.25f,45.36f,78.78f};
-        String content =null;
-        // 测试视频的地址：/storage/emulated/0/HeartRateDect/video/SucessVideo/videoMJPG.avi
+        String content;
+        // Test video address:
+        // /storage/emulated/0/HeartRateDect/video/SucessVideo/videoMJPG.avi
         FormatUtil.videoPath = FormatUtil.videoPath + FormatUtil.videoName;
-        Log.d("TRANSCODEC","videopath"+FormatUtil.videoPath);
-        heartRate = (int)FormatUtil.stringFromJNI(FormatUtil.videoPath);
-        content =Float.toString(Dates[0])+",";
-        for(int i=1;i<Dates.length;i++){
-            content += Float.toString(Dates[i])+",";
+        Log.d("TRANSCODEC","videoPath"+FormatUtil.videoPath);
+        // get the HRD and BVP。
+        data = FormatUtil.heartRateDetection(FormatUtil.videoPath);
+        heartRate = (int)data[0];
+        // Log data to a local file.
+        content =Integer.toString(heartRate)+",";
+        for(int i=1;i<data.length;i++){
+            content += Float.toString(data[i])+",";
         }
-        Log.i(tag, "content:  " +content);
-        writeTxtToFile(Dates,content);
+        Log.i(TAG_CAMERA_ACTIVITY, "content:  " +content);
+        writeTxtToFile(content);
+        // Delete the video.
         deleteFile(FormatUtil.videoPath);
-        Log.i(tag, "date: "+heartRate);
+        Log.i(TAG_CAMERA_ACTIVITY, "data: "+heartRate);
         completeHRD = true;
-
         return heartRate;
     }
+
     class MyListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             mTimeHandler1.removeMessages(0);
             mTimeHandler2.removeMessages(0);
             Intent intent=new Intent(getActivity(),ResultActivity.class);
-            intent.putExtra("heartrate",HeartRate);
-            //intent.putExtra("wave",Data[])
+            intent.putExtra("heartRate",heartRate);
+            intent.putExtra("data",data);
             startActivity(intent);
         }
     }

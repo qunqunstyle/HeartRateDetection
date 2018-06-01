@@ -1,5 +1,5 @@
 /*
-**	Brief£ºNon-contact heart rate detection software based on OpenCV3.1 and Qt 5.7
+**	Brief: Non-contact heart rate detection software based on OpenCV3.1 and Qt 5.7
 **	Author : Jason.Lee
 **	Date : 2017-10-17
 */
@@ -28,16 +28,17 @@
 #include<ctime>
 #include "opencv2/core.hpp"
 
-
 #define MAX_LENGTH 250
 #define ROI_ROWS 640
 #define ROI_COLS 480
 #define PI 3.141592653589793
 
-
 using namespace std;
 using namespace cv;
 
+extern Mat frames[MAX_LENGTH];
+extern float bvp[MAX_LENGTH][ROI_ROWS][ROI_COLS];
+extern float perFrame_BVP[MAX_LENGTH];
 
 class HRD
 {
