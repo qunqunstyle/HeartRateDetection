@@ -18,7 +18,7 @@
         android:layout_below="@+id/appIcon"
         android:layout_centerHorizontal="true"
         android:paddingTop="20dp"
-        android:text="陶友圈"
+        android:text="心率检测"
         android:textSize="20sp" />
 
     <TextView
@@ -28,18 +28,18 @@
         android:layout_below="@+id/appName"
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
-        android:text="V1.0" />
+        android:text="V2.0" />
 
     <TextView
         android:id="@+id/appAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/appVersion"
-        android:layout_centerHorizontal="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="40dp"
-        android:text="     本陶吧系统由个人设计完成，虽然较low，但是有很大的提升空间。\n\n     如有兴趣，将来会进一步的完善和优化。。\n\n   " />
+        android:text="     本心率检测系统由两人团队设计完成，现阶段存在较多问题，攻城狮一直在努力改进中。。。\n\n     后续功能，敬请期待。。。\n\n   " />
 
 
 </RelativeLayout>

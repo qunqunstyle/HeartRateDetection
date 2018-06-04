@@ -49,11 +49,7 @@ public class MySurfaceView extends SurfaceView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-         widthSize = MeasureSpec.getSize(widthMeasureSpec);
-      //  int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int screenWidth = CommonUtils.getScreenWidth(getContext());
         int screenHeight = CommonUtils.getScreenHeight(getContext());
         height=600;
@@ -64,19 +60,14 @@ public class MySurfaceView extends SurfaceView {
         setMeasuredDimension((int) screenWidth1, (int) screenHeight1);
         //setMeasuredDimension(widthSize, heightSize);
 
-
-
     }
 
     @Override
     public void draw(Canvas canvas) {
         Log.e("onDraw", "draw: test");
         Path path = new Path();
-
-      /*  mpaint.setColor(white);
-        mpaint.setStrokeWidth(50);
-        canvas.drawCircle(height / 2, height / 2, height / 2,mpaint );*/
-        path.addCircle(widthSize / 2, height / 2, height / 2, Path.Direction.CCW);
+        //path.addCircle(widthSize / 2, height / 2, height / 2, Path.Direction.CCW);
+        path.addCircle(widthSize / 2, widthSize / 2, widthSize / 2, Path.Direction.CCW);
         canvas.clipPath(path, Region.Op.REPLACE);
         super.draw(canvas);
     }

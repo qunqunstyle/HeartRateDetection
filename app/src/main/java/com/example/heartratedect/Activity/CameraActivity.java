@@ -124,6 +124,15 @@ public class CameraActivity extends Fragment {
                         show.setVisibility(View.VISIBLE);
                         heartRateLabel.setText(heartRate);
                         testButton.setVisibility(View.VISIBLE);
+
+                        /*Intent intent=new Intent(getActivity(),ResultActivity.class);
+                        intent.putExtra("heartRate",heartRate);
+                        intent.putExtra("data",data);
+                        startActivity(intent);
+                        mTimeHandler2.removeMessages(0);*/
+
+
+
                     }
                     sendEmptyMessageDelayed(0,0);
                 }

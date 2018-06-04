@@ -117,9 +117,9 @@ public class Tab_Setting_Fragment extends Fragment {
 
 			@Override
 			public void onClick(View arg0) {
-				//Toast.makeText(getActivity(), "暂未开发，敬请期待", Toast.LENGTH_SHORT)
-				//.show();
-				Intent intent = new Intent(Intent.ACTION_MAIN);
+				Toast.makeText(getActivity(), "暂未开发，敬请期待", Toast.LENGTH_SHORT)
+				.show();
+				/*Intent intent = new Intent(Intent.ACTION_MAIN);
 				intent.addCategory(Intent.CATEGORY_LAUNCHER);
 				ComponentName comp = new ComponentName("com.Personal.com", "com.Personal.com.UnityPlayerActivity");
 				intent.setComponent(comp);
@@ -130,7 +130,7 @@ public class Tab_Setting_Fragment extends Fragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("from", "来自测试应用");
 				intent.putExtras(bundle);
-				startActivity(intent);
+				startActivity(intent);*/
 
 			}
 		});
@@ -138,10 +138,12 @@ public class Tab_Setting_Fragment extends Fragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent();
+				Toast.makeText(getActivity(), "暂未开发，敬请期待", Toast.LENGTH_SHORT)
+						.show();
+				/*Intent intent = new Intent();
 				intent.setClass(getActivity(), TuCaoActivity.class);
 				intent.putExtra("userName", tv_name.getText().toString());
-				startActivity(intent);
+				startActivity(intent);*/
 			}
 		});
 		aboutRelativeLayout.setOnClickListener(new OnClickListener() {
