@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         }
     }
 
-  //  private Tab_Data_Fragment dataFragment;
+    private Tab_Data_Fragment dataFragment;
     private Tab_Setting_Fragment settingFragment;
     private CameraActivity cameraActivity;
    // private Tab_Date_Fragment datefragment;
@@ -94,11 +94,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     private View data_view;
     private View setting_view;
 
-    //private ImageView img_data;
+    private ImageView img_data;
     private ImageView img_camera;
     private ImageView img_setting;
 
-    //private TextView tv_data;
+    private TextView tv_data;
     private TextView tv_camera;
     private TextView tv_setting;
 
@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     private Bundle loginBundle;
     private String userName;
     private Bundle DataBundle;
-    //private Bundle dateBundle;
+    private Bundle dataBundle;
     private Bundle SettingBundle;
 
 
@@ -156,25 +156,25 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     /*String data = intent1.getStringExtra("heartrate");
         heartdateshow.setText(data);*/
     private void initViews() {
-        //camera_view = findViewById(R.id.activity_camera);
+        camera_view = findViewById(R.id.activity_camera);
         camera_view = findViewById(R.id.news_layout);
-       // data_view = findViewById(R.id.date_layout);
+        data_view = findViewById(R.id.data_layout);
         setting_view = findViewById(R.id.setting_layout);
         img_camera = (ImageView) findViewById(R.id.news_image);
-       // img_data = (ImageView)findViewById(R.id.date_image);
+        img_data = (ImageView)findViewById(R.id.data_image);
         img_setting = (ImageView) findViewById(R.id.setting_image);
         tv_camera = (TextView) findViewById(R.id.news_text);
-        //tv_data = (TextView) findViewById(R.id.date_text);
+        tv_data = (TextView) findViewById(R.id.data_text);
         tv_setting = (TextView) findViewById(R.id.setting_text);
-       // camera_view.setOnClickListener(this);
+        camera_view.setOnClickListener(this);
         camera_view.setOnClickListener(this);
         setting_view.setOnClickListener(this);
-      //  data_view.setOnClickListener(this);
+        data_view.setOnClickListener(this);
 
         // 获取从LoginActivity传过来的用户名，显示在设置里面
         loginBundle = getIntent().getExtras();
         DataBundle = new Bundle();
-      //  dateBundle = new Bundle();
+        dataBundle = new Bundle();
         SettingBundle = new Bundle();
         if (loginBundle != null) {
             userName = loginBundle.getString("userName");
@@ -186,7 +186,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
             Log.i("TAG", "extras为空");
         }
         DataBundle.putString("userName", userName);
-       // dateBundle.putString("userName", userName);
+        dataBundle.putString("userName", userName);
         SettingBundle.putString("userName", userName);
     }
 
@@ -197,9 +197,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 Log.i("TAG", "模拟点击了");
                 setTabSelection(0);
                 break;
-          /*  case R.id.date_layout:
+            case R.id.data_layout:
                 setTabSelection(2);
-                break;*/
+                break;
             case R.id.setting_layout:
                 setTabSelection(1);
                 break;
@@ -260,24 +260,24 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                     Log.i("TAG", "settingFragment不为空。。。。。。");
                 }
                 break;
-            /*case 2:
+            case 2:
                 // 当点击了结果页tab时，改变控件的图片和文字颜色
                 img_data.setImageResource(R.drawable.date_select);
                 tv_data.setTextColor(Color.parseColor("#1296db"));
-                if (datefragment == null) {
-                    // 如果dateFragment为空，则创建一个并添加到界面上
-                    datefragment = new Tab_Date_Fragment();
+                if (dataFragment == null) {
+                    // 如果dataFragment为空，则创建一个并添加到界面上
+                    dataFragment = new Tab_Data_Fragment();
                     // 从activity传递给Fragment里面去
-                    datefragment.setArguments(dateBundle);
-                    transaction.add(R.id.content, datefragment);
+                    dataFragment.setArguments(dataBundle);
+                    transaction.add(R.id.content, dataFragment);
                     Log.i("TAG", "settingFragment为空。。。。。。");
                 } else {
                     // 如果dateFragment不为空，则直接将它显示出来
                     // dateFragment.setArguments(bundle);
-                    transaction.show(datefragment);
+                    transaction.show(dataFragment);
                     Log.i("TAG", "dateFragment不为空。。。。。。");
                 }
-                break;*/
+                break;
 
             default:
                 break;
@@ -290,9 +290,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         img_camera.setImageResource(R.drawable.news_unselected);
         tv_camera.setTextColor(Color.parseColor("#82858b"));
         img_setting.setImageResource(R.drawable.setting_unselected);
-        //img_data.setImageResource(R.drawable.date_select);
+        img_data.setImageResource(R.drawable.date);
         tv_setting.setTextColor(Color.parseColor("#82858b"));
-        //tv_data.setTextColor(Color.parseColor("#82858b"));
+        tv_data.setTextColor(Color.parseColor("#82858b"));
     }
 
    /* *
@@ -308,9 +308,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         if (settingFragment != null) {
             transaction.hide(settingFragment);
         }
-       /* if (datefragment != null) {
-            transaction.hide(datefragment);
-        }*/
+        if (dataFragment != null) {
+            transaction.hide(dataFragment);
+        }
     }
 
     @Override

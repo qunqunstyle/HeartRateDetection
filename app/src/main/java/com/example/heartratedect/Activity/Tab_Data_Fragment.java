@@ -1,5 +1,6 @@
 package com.example.heartratedect.Activity;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
@@ -26,13 +27,13 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.Utils;
+import com.example.heartratedect.R;
 
 import java.util.ArrayList;
 
-import static com.example.heartratedect.FormatUtil.MAX_LENGTH;
+//import static com.example.heartratedect.FormatUtil.MAX_LENGTH;
 
-public class Tab_Data_Fragment extends FragmentActivity implements OnChartGestureListener,
-        OnChartValueSelectedListener{
+public class Tab_Data_Fragment extends Fragment{
 
     private TextView unitLabel;
     private TextView heartRateValueLabel;
@@ -41,25 +42,25 @@ public class Tab_Data_Fragment extends FragmentActivity implements OnChartGestur
     private LineChart lineChart;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public  View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_data);
+        View dataLayout = inflater.inflate(R.layout.tab_data, container,
+                false);
 
-        Intent intent = getIntent();
-        float[] bvp = intent.getFloatArrayExtra("data");
 
-        unitLabel = findViewById(R.id.unitLabel);
-        heartRateValueLabel= findViewById(R.id.heartRateValueLabel);
-        description = findViewById(R.id.description);
-        suggestion = findViewById(R.id.suggestion);
-        lineChart = findViewById(R.id.chart1);
+        unitLabel = (TextView)dataLayout.findViewById(R.id.unitLabel);
+        heartRateValueLabel= (TextView)dataLayout.findViewById(R.id.heartRateValueLabel);
+        description =(TextView)dataLayout. findViewById(R.id.description);
+        suggestion = (TextView)dataLayout.findViewById(R.id.suggestion);
+        lineChart = (LineChart) dataLayout.findViewById(R.id.chart1);
 
         unitLabel.setText("次/秒");
         heartRateValueLabel.setText("70 ");
         description.setText("您的心率属于健康水平");
         suggestion.setText("根据大数据分析得，您的心率属于健康水平，请注意保持，并坚持量测");
-        // Set listener of the chart.
-        lineChart.setOnChartGestureListener(this);
+      /*  // Set listener of the chart.
+        lineChart.setOnChartGestureListener(getContext());
         lineChart.setOnChartValueSelectedListener(this);
         //Set the attributes associated with the line chart.
         lineChart.setDrawGridBackground(false);
@@ -68,26 +69,12 @@ public class Tab_Data_Fragment extends FragmentActivity implements OnChartGestur
         lineChart.setScaleEnabled(false);
         lineChart.setScaleXEnabled(true);
         lineChart.setScaleYEnabled(true);
-        lineChart.setPinchZoom(true);
+        lineChart.setPinchZoom(true);*/
 
-        XAxis xAxis = lineChart.getXAxis();
-        YAxis leftAxis = lineChart.getAxisLeft();
-        leftAxis.removeAllLimitLines();
-        leftAxis.enableGridDashedLine(10f,10f,0f);
-        leftAxis.setDrawZeroLine(false);
-        leftAxis.setDrawLimitLinesBehindData(true);
-
-        lineChart.getAxisRight().setEnabled(true);
-        lineChart.getAxisLeft().setEnabled(true);
-        lineChart.getXAxis().setEnabled(false);
-
-        setLineChartData(bvp);
-        lineChart.animateX(2500, Easing.EasingOption.EaseInOutQuart);
-        Legend legend = lineChart.getLegend();
-        legend.setForm(Legend.LegendForm.LINE);
+      return dataLayout;
     }
 
-    private void setLineChartData(float[] bvp){
+    /*private void setLineChartData(float[] bvp){
         ArrayList<String> xVals = new ArrayList<String>();
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int index = 1;index<MAX_LENGTH;index++){
@@ -114,7 +101,8 @@ public class Tab_Data_Fragment extends FragmentActivity implements OnChartGestur
         dataSets.add(lineDataSet);
         LineData data = new LineData(xVals,dataSets);
         lineChart.setData(data);
-    }
+    }*/
+/*
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
@@ -176,6 +164,7 @@ public class Tab_Data_Fragment extends FragmentActivity implements OnChartGestur
     public void onNothingSelected() {
         Log.i("Nothing selected", "Nothing selected.");
     }
+*/
 
 
 }
