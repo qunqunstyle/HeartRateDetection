@@ -107,11 +107,11 @@ public class ResultActivity extends AppCompatActivity implements OnChartGestureL
         String heartRate = bundle.getString("heartRate");
         float[] bvp= bundle.getFloatArray("data");
 
-        unitLabel = findViewById(R.id.unitLabel);
-        heartRateValueLabel= findViewById(R.id.heartRateValueLabel);
-        description = findViewById(R.id.description);
-        suggestion = findViewById(R.id.suggestion);
-        lineChart = findViewById(R.id.lineChart);
+        unitLabel = (TextView) findViewById(R.id.unitLabel);
+        heartRateValueLabel= (TextView)findViewById(R.id.heartRateValueLabel);
+        description =(TextView) findViewById(R.id.description);
+        suggestion = (TextView)findViewById(R.id.suggestion);
+        lineChart = (LineChart) findViewById(R.id.lineChart);
 
         unitLabel.setText("次/秒");
         heartRateValueLabel.setText(heartRate);

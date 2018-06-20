@@ -131,51 +131,29 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         }
         setTabSelection(0);
 
-       /*// Intent intent1= this.getIntent();
-       // String data = intent1.getStringExtra("heartrate");
-        int id = getIntent().getIntExtra("id",0);
-        if(id == 1){
-
-            // FragmentManager fmanger = getFragmentManager();
-            // 每次选中之前先清除掉上次的选中状态
-            clearSelection();
-            // 开启一个Fragment事务
-            FragmentTransaction transaction1 = fragmentManager.beginTransaction();
-            // 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
-            hideFragments(transaction1);
-            transaction1.replace(R.id.content, datefragment);
-            transaction1.commit();
-            img_camera.setImageResource(R.drawable.news_selected);
-            tv_camera.setTextColor(Color.parseColor("#1296db"));
-
-
-        }*/
     }
 
 
-    /*String data = intent1.getStringExtra("heartrate");
-        heartdateshow.setText(data);*/
+
     private void initViews() {
-        camera_view = findViewById(R.id.activity_camera);
         camera_view = findViewById(R.id.news_layout);
-        data_view = findViewById(R.id.data_layout);
-        setting_view = findViewById(R.id.setting_layout);
+       // data_view = findViewById(R.id.data_layout);
+       //  setting_view = findViewById(R.id.setting_layout);
         img_camera = (ImageView) findViewById(R.id.news_image);
-        img_data = (ImageView)findViewById(R.id.data_image);
-        img_setting = (ImageView) findViewById(R.id.setting_image);
+        //img_data = (ImageView)findViewById(R.id.data_image);
+        //img_setting = (ImageView) findViewById(R.id.setting_image);
         tv_camera = (TextView) findViewById(R.id.news_text);
-        tv_data = (TextView) findViewById(R.id.data_text);
-        tv_setting = (TextView) findViewById(R.id.setting_text);
+        //tv_data = (TextView) findViewById(R.id.data_text);
+        //tv_setting = (TextView) findViewById(R.id.setting_text);
         camera_view.setOnClickListener(this);
-        camera_view.setOnClickListener(this);
-        setting_view.setOnClickListener(this);
-        data_view.setOnClickListener(this);
+        //setting_view.setOnClickListener(this);
+        //data_view.setOnClickListener(this);
 
         // 获取从LoginActivity传过来的用户名，显示在设置里面
         loginBundle = getIntent().getExtras();
         DataBundle = new Bundle();
-        dataBundle = new Bundle();
-        SettingBundle = new Bundle();
+        //dataBundle = new Bundle();
+        //SettingBundle = new Bundle();
         if (loginBundle != null) {
             userName = loginBundle.getString("userName");
             if (userName == null) {
@@ -186,8 +164,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
             Log.i("TAG", "extras为空");
         }
         DataBundle.putString("userName", userName);
-        dataBundle.putString("userName", userName);
-        SettingBundle.putString("userName", userName);
+        //dataBundle.putString("userName", userName);
+        //SettingBundle.putString("userName", userName);
     }
 
     @Override
@@ -197,23 +175,16 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 Log.i("TAG", "模拟点击了");
                 setTabSelection(0);
                 break;
-            case R.id.data_layout:
+          /*  case R.id.data_layout:
                 setTabSelection(2);
                 break;
             case R.id.setting_layout:
                 setTabSelection(1);
-                break;
+                break;*/
             default:
                 break;
         }
     }
-
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == -1) {
-            MainActivity.this.findViewById(R.id.iv_refresh).performClick();
-        }
-    }*/
 
     public void setTabSelection(int i) {
         // 每次选中之前先清除掉上次的选中状态
@@ -242,7 +213,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 }
                 break;
 
-            case 1:
+          /*  case 1:
                 // 当点击了设置tab时，改变控件的图片和文字颜色
                 img_setting.setImageResource(R.drawable.setting_selected);
                 tv_setting.setTextColor(Color.parseColor("#1296db"));
@@ -270,14 +241,14 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                     // 从activity传递给Fragment里面去
                     dataFragment.setArguments(dataBundle);
                     transaction.add(R.id.content, dataFragment);
-                    Log.i("TAG", "settingFragment为空。。。。。。");
+                    Log.i("TAG", "dataFragment为空。。。。。。");
                 } else {
                     // 如果dateFragment不为空，则直接将它显示出来
                     // dateFragment.setArguments(bundle);
                     transaction.show(dataFragment);
-                    Log.i("TAG", "dateFragment不为空。。。。。。");
+                    Log.i("TAG", "dataFragment不为空。。。。。。");
                 }
-                break;
+                break;*/
 
             default:
                 break;
@@ -289,10 +260,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     private void clearSelection() {
         img_camera.setImageResource(R.drawable.news_unselected);
         tv_camera.setTextColor(Color.parseColor("#82858b"));
-        img_setting.setImageResource(R.drawable.setting_unselected);
+        /*img_setting.setImageResource(R.drawable.setting_unselected);
         img_data.setImageResource(R.drawable.date);
         tv_setting.setTextColor(Color.parseColor("#82858b"));
-        tv_data.setTextColor(Color.parseColor("#82858b"));
+        tv_data.setTextColor(Color.parseColor("#82858b"));*/
     }
 
    /* *
@@ -305,12 +276,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         if (cameraActivity != null) {
             transaction.hide(cameraActivity);
         }
-        if (settingFragment != null) {
+        /*if (settingFragment != null) {
             transaction.hide(settingFragment);
         }
         if (dataFragment != null) {
             transaction.hide(dataFragment);
-        }
+        }*/
     }
 
     @Override
@@ -321,61 +292,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 }
 
 
-   /* String[] permissions = new String[]{Manifest.permission.CAMERA , Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    List<String> mPermissionList = new ArrayList<>();
-
-    private ImageView welcomeImg = null;
-    private static final int PERMISSION_REQUEST = 1;
-    *//**
-     * 检查权限
-     *//*
-    private void checkPermission() {
-        mPermissionList.clear();
-        *//**
-         * 判断哪些权限未授予
-         *//*
-        for (int i = 0; i < permissions.length; i++) {
-            if (ContextCompat.checkSelfPermission(this, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
-                mPermissionList.add(permissions[i]);
-            }
-        }
-        *//**
-         * 判断是否为空
-         *//*
-        if (mPermissionList.isEmpty()) {//未授予的权限为空，表示都授予了
-            initImage();
-        } else {//请求权限方法
-            String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
-            ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST);
-        }
-    }
-
-    *//**
-     * 响应授权
-     * 这里不管用户是否拒绝，都进入首页，不再重复申请权限
-     *//*
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSION_REQUEST:
-                initImage();
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                break;
-        }
-    }
-    @Override
-    protected void onCreate( Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-        checkPermission();
-
-    }
+  /*
     private void initImage(){
         welcomeImg = (ImageView)findViewById(R.id.welcome_img);
         welcomeImg.setBackgroundResource(R.drawable.tubiao);
