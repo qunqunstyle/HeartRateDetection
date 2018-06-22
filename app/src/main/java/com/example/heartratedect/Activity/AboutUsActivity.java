@@ -7,7 +7,7 @@ import android.view.Window;
 
 import com.example.heartratedect.R;
 
-
+// just a test for github
 public class AboutUsActivity extends Activity {
 
 	@Override
