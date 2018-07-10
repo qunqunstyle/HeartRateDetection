@@ -17,7 +17,7 @@
        android:background="@drawable/circle"/>
 
     <com.example.heartratedect.CameraProgressBar
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="65dp"
         android:id="@+id/camera_ProgressBar"
         android:layout_width="280dp"
         android:layout_height="wrap_content"

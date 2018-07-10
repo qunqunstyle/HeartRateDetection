@@ -11,8 +11,8 @@ float perFrame_BVP[MAX_LENGTH];
 HRD::HRD(){
 	
 	levels = 4;
-	fl = 2.0f;
-	fh = 2.6f;
+	fl = 2.1f;
+	fh = 2.8f;
 	fps = 25.0f;
 	heartRate = 0.0f;
 	LENGTH = MAX_LENGTH;

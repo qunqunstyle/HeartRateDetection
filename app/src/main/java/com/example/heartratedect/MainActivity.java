@@ -137,23 +137,23 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     private void initViews() {
         camera_view = findViewById(R.id.news_layout);
-       // data_view = findViewById(R.id.data_layout);
-       //  setting_view = findViewById(R.id.setting_layout);
+        data_view = findViewById(R.id.data_layout);
+        setting_view = findViewById(R.id.setting_layout);
         img_camera = (ImageView) findViewById(R.id.news_image);
-        //img_data = (ImageView)findViewById(R.id.data_image);
-        //img_setting = (ImageView) findViewById(R.id.setting_image);
+        img_data = (ImageView)findViewById(R.id.data_image);
+        img_setting = (ImageView) findViewById(R.id.setting_image);
         tv_camera = (TextView) findViewById(R.id.news_text);
-        //tv_data = (TextView) findViewById(R.id.data_text);
-        //tv_setting = (TextView) findViewById(R.id.setting_text);
+        tv_data = (TextView) findViewById(R.id.data_text);
+        tv_setting = (TextView) findViewById(R.id.setting_text);
         camera_view.setOnClickListener(this);
-        //setting_view.setOnClickListener(this);
-        //data_view.setOnClickListener(this);
+        setting_view.setOnClickListener(this);
+        data_view.setOnClickListener(this);
 
         // 获取从LoginActivity传过来的用户名，显示在设置里面
         loginBundle = getIntent().getExtras();
         DataBundle = new Bundle();
-        //dataBundle = new Bundle();
-        //SettingBundle = new Bundle();
+        dataBundle = new Bundle();
+        SettingBundle = new Bundle();
         if (loginBundle != null) {
             userName = loginBundle.getString("userName");
             if (userName == null) {
@@ -164,8 +164,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
             Log.i("TAG", "extras为空");
         }
         DataBundle.putString("userName", userName);
-        //dataBundle.putString("userName", userName);
-        //SettingBundle.putString("userName", userName);
+        dataBundle.putString("userName", userName);
+        SettingBundle.putString("userName", userName);
     }
 
     @Override
@@ -175,12 +175,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 Log.i("TAG", "模拟点击了");
                 setTabSelection(0);
                 break;
-          /*  case R.id.data_layout:
+            case R.id.data_layout:
                 setTabSelection(2);
                 break;
             case R.id.setting_layout:
                 setTabSelection(1);
-                break;*/
+                break;
             default:
                 break;
         }
@@ -213,7 +213,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 }
                 break;
 
-          /*  case 1:
+            case 1:
                 // 当点击了设置tab时，改变控件的图片和文字颜色
                 img_setting.setImageResource(R.drawable.setting_selected);
                 tv_setting.setTextColor(Color.parseColor("#1296db"));
@@ -248,7 +248,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                     transaction.show(dataFragment);
                     Log.i("TAG", "dataFragment不为空。。。。。。");
                 }
-                break;*/
+                break;
 
             default:
                 break;
@@ -260,10 +260,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     private void clearSelection() {
         img_camera.setImageResource(R.drawable.news_unselected);
         tv_camera.setTextColor(Color.parseColor("#82858b"));
-        /*img_setting.setImageResource(R.drawable.setting_unselected);
+        img_setting.setImageResource(R.drawable.setting_unselected);
         img_data.setImageResource(R.drawable.date);
         tv_setting.setTextColor(Color.parseColor("#82858b"));
-        tv_data.setTextColor(Color.parseColor("#82858b"));*/
+        tv_data.setTextColor(Color.parseColor("#82858b"));
     }
 
    /* *
@@ -276,12 +276,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         if (cameraActivity != null) {
             transaction.hide(cameraActivity);
         }
-        /*if (settingFragment != null) {
+        if (settingFragment != null) {
             transaction.hide(settingFragment);
         }
         if (dataFragment != null) {
             transaction.hide(dataFragment);
-        }*/
+        }
     }
 
     @Override

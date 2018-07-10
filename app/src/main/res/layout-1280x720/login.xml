@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/login_background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/background_login_div_bg"
+        android:padding="15dp" >
+
+        <TextView
+            android:id="@+id/tv_login_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="心率监测登录"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_login_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_login_title"
+            android:layout_marginTop="20dp"
+            android:text="帐号"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_login_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_login_name"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edit_style"
+            android:hint="请输入昵称"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/tv_login_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_login_name"
+            android:layout_marginTop="10dp"
+            android:text="密码"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_login_password"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edit_style"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/et_login_password"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_style"
+            android:text="登录" />
+        <TextView 
+            android:id="@+id/tv_login_regist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_login"
+            android:clickable="true"
+            android:gravity="right"
+            android:layout_marginTop="15dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="没有帐号？点击注册"/>
+    </RelativeLayout>
+
+</LinearLayout>

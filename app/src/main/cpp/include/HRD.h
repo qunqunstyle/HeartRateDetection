@@ -28,7 +28,7 @@
 #include<ctime>
 #include "opencv2/core.hpp"
 
-#define MAX_LENGTH 250
+#define MAX_LENGTH 280
 #define ROI_ROWS 640
 #define ROI_COLS 480
 #define PI 3.141592653589793

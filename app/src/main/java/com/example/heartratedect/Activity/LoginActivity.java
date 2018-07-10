@@ -134,7 +134,7 @@ public class LoginActivity extends Activity {
 				Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG)
 						.show();
 				Intent intent = new Intent();
-				intent.setClass(LoginActivity.this, CameraActivity.class);
+				intent.setClass(LoginActivity.this, MainActivity.class);
 				intent.putExtra("userName", username);
 				startActivity(intent);
 				LoginActivity.this.finish();

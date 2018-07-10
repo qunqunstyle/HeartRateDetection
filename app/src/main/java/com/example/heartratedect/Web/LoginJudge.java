@@ -32,7 +32,7 @@ import java.util.Map;
  */
 public class LoginJudge {
 
-	private final String serverUrl = "http://192.168.191.1:8080/MSG/";
+	private final String serverUrl = "http://localhost:8080/msgserver/";
 
 	/**
 	 * 使用get方式向服务器发送请求，如http://localhost:8080/login.action?user.userName=cjs&
