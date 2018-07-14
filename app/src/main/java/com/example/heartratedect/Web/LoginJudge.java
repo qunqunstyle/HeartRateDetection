@@ -32,8 +32,8 @@ import java.util.Map;
  */
 public class LoginJudge {
 
-	private final String serverUrl = "http://192.168.137.1:8080/";
-
+	//private final String serverUrl = "http://192.168.137.1:8080/";
+	private String serverUrl = "http://39.106.28.218:8888/msgserver/";
 	/**
 	 * 使用get方式向服务器发送请求，如http://localhost:8080/login.action?user.userName=cjs&
 	 * user.userPassword=123 向服务器发出action请求，附带用户名和密码

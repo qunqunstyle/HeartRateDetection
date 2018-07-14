@@ -15,7 +15,8 @@ import java.io.IOException;
 //用来判断注册的用户名是否已经存在。
 public class IsUsernameExit {
 
-	private String serverUrl = "http://192.168.137.1:8080/";
+	private String serverUrl = "http://39.106.28.218:8888/msgserver/";
+	//private String serverUrl = "http://192.168.137.1:8080/";
 	private String httpResult;
 
 	public Boolean isExit(String username) {

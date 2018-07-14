@@ -40,7 +40,8 @@ import com.example.heartratedect.Web.IsUsernameExit;
 
 
 public class RegistActivity extends Activity {
-	private final String serverUrl = "http://192.168.137.1:8080/";
+	private String serverUrl = "http://39.106.28.218:8888/msgserver/";
+	//private final String serverUrl = "http://192.168.137.1:8080/";
 	private EditText et_name;
 	private EditText et_password;
 	private TextView tv_back;
