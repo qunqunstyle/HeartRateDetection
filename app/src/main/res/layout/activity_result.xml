@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.heartratedect.Activity.ResultActivity">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="vertical">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,7 +40,7 @@
         <RelativeLayout
             android:id="@+id/heartdate"
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:background="#FFFFFF"
             android:layout_below="@id/line1">
 
@@ -46,54 +50,168 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:gravity="center"
+
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:background="@drawable/heart"/>
                 <TextView
                     android:id="@+id/heartRateValueLabel"
-                    android:layout_width="150dp"
+                    android:layout_width="140dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:gravity="center"
                     android:text="70"
                     android:textColor="#000"
-                    android:textSize="90dp" />
+                    android:textSize="80dp" />
 
                 <TextView
                     android:id="@+id/unitLabel"
 
-                    android:layout_width="100dp"
+                    android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal|bottom"
                     android:gravity="center"
                     android:text="次/秒"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="30dp" />
             </LinearLayout>
         </RelativeLayout>
 
         <View
             android:id="@+id/line2"
             android:layout_width="fill_parent"
-            android:layout_height="23dp"
+            android:layout_height="10dp"
             android:layout_below="@+id/heartdate"
-            android:layout_marginTop="-13dp" />
+            />
+
+        <RelativeLayout
+            android:id="@+id/SpO2"
+            android:layout_width="fill_parent"
+            android:layout_height="110dp"
+            android:background="#FFFFFF"
+            android:layout_below="@id/line2">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:gravity="center"
+                    android:background="@drawable/spo2"/>
+                <TextView
+                    android:id="@+id/valueofSpO2"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:gravity="center"
+                    android:text="98"
+                    android:textColor="#000"
+                    android:textSize="80dp" />
+
+                <TextView
+                    android:id="@+id/unitLabe2"
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textColor="#000000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </RelativeLayout>
+        <View
+            android:id="@+id/line3"
+            android:layout_width="fill_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/SpO2"
+            />
+
+        <RelativeLayout
+            android:id="@+id/check_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:layout_below="@id/line3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="选择你的状态"/>
+                <RadioGroup
+                    android:id="@+id/rgSex"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.0"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@+id/rbMan"
+                    android:orientation="horizontal"
+                    >
+                    <RadioButton
+                        android:id="@+id/rbMan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:text="运动"
+                        />
+                    <RadioButton
+                        android:id="@+id/rbMadal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:text="静止"/>
+                </RadioGroup>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="fill_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/check_box"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@id/line2">
+            android:layout_below="@id/line4">
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal|bottom"
-                android:gravity="center"
-                android:text="您的心率属于健康水平"
+                android:layout_height="wrap_content"
+                android:text="输入备注："
                 android:textColor="#000000"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
 
+            <EditText
+                android:id="@+id/remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="请填写备注"
+
+                />
             <TextView
                 android:id="@+id/suggestion"
                 android:layout_width="match_parent"
@@ -106,5 +224,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-
+</ScrollView>
 </android.support.constraint.ConstraintLayout>

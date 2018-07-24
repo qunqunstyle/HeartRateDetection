@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.heartratedect.Activity.Tab_Data_Fragment">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="vertical">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -103,8 +108,44 @@
                 android:text="根据大数据分析得，您的心率属于健康水平，请注意保持，并坚持量测"
                 android:textColor="#000000"
                 android:textSize="20dp" />
+            <TextView
+                android:id="@+id/suggestion1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center"
+                android:text="根据大数据分析得，您的心率属于健康水平，请注意保持，并坚持量测"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/suggestion2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center"
+                android:text="根据大数据分析得，您的心率属.........于健康水平，请注意保持，并坚持量测"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/suggestion3"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center"
+                android:text="根据大数据分析得，您的心率属.........于健康水平，请注意保持，并坚持量测"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+            <TextView
+            android:id="@+id/suggestion4"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:gravity="center"
+            android:text="根据大数据分析得，您的心率属.........于健康水平，请注意保持，并坚持量测"
+            android:textColor="#000000"
+            android:textSize="20dp" />
         </LinearLayout>
 
     </RelativeLayout>
-
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

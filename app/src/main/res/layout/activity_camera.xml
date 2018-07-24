@@ -87,6 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_nor_down"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="12dp"
         android:text="查看分析结果"

@@ -123,13 +123,13 @@ public class CameraActivity extends Fragment {
                         heartRateLabel.setVisibility(View.VISIBLE);
                         show.setVisibility(View.VISIBLE);
                         heartRateLabel.setText(heartRate);
-                        testButton.setVisibility(View.VISIBLE);
+                        //testButton.setVisibility(View.VISIBLE);
 
-                        /*Intent intent=new Intent(getActivity(),ResultActivity.class);
+                        Intent intent=new Intent(getActivity(),ResultActivity.class);
                         intent.putExtra("heartRate",heartRate);
                         intent.putExtra("data",data);
                         startActivity(intent);
-                        mTimeHandler2.removeMessages(0);*/
+                        mTimeHandler2.removeMessages(0);
 
 
 
@@ -400,6 +400,7 @@ public class CameraActivity extends Fragment {
         return heartRate;
     }
 
+    //click the button，skip to ResultActivity
     class MyListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
