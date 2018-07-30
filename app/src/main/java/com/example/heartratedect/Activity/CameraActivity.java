@@ -92,7 +92,7 @@ public class CameraActivity extends Fragment {
     private static Handler mTimeHandler1;
     private static Handler mTimeHandler2;
     private static float data[] = new float[MAX_LENGTH];
-    private static final int MAX_RECORD_TIME = 10 * 1000;
+    private static final int MAX_RECORD_TIME = 12 * 1000;
     private static final int PLUSH_PROGRESS = 100;
     private final int max = MAX_RECORD_TIME / PLUSH_PROGRESS;
 
@@ -123,14 +123,14 @@ public class CameraActivity extends Fragment {
                         heartRateLabel.setVisibility(View.VISIBLE);
                         show.setVisibility(View.VISIBLE);
                         heartRateLabel.setText(heartRate);
-                        //testButton.setVisibility(View.VISIBLE);
+                        testButton.setVisibility(View.VISIBLE);
 
-                        Intent intent=new Intent(getActivity(),ResultActivity.class);
+                        /*Intent intent=new Intent(getActivity(),ResultActivity.class);
                         intent.putExtra("heartRate",heartRate);
                         intent.putExtra("data",data);
                         startActivity(intent);
                         mTimeHandler2.removeMessages(0);
-
+*/
 
 
                     }
@@ -223,7 +223,7 @@ public class CameraActivity extends Fragment {
                     camera.setDisplayOrientation(90);
                     camera.enableShutterSound(false);
                     Camera.Parameters parameters = camera.getParameters();
-                    parameters.setPreviewFrameRate(25);
+                    parameters.setPreviewFrameRate(30);
                     camera.setParameters(parameters);
                     camera.unlock();
                     mediaRecorder.setCamera(camera);
@@ -388,13 +388,14 @@ public class CameraActivity extends Fragment {
         heartRate = (int)data[0];
         // Log data to a local file.
         content =Integer.toString(heartRate)+",";
+        data[0] = data[1];
         for(int i=1;i<data.length;i++){
             content += Float.toString(data[i])+",";
         }
         Log.i(TAG_CAMERA_ACTIVITY, "content:  " +content);
         writeTxtToFile(content);
         // Delete the video.
-        deleteFile(FormatUtil.videoPath);
+        //deleteFile(FormatUtil.videoPath);
         Log.i(TAG_CAMERA_ACTIVITY, "data: "+heartRate);
         completeHRD = true;
         return heartRate;

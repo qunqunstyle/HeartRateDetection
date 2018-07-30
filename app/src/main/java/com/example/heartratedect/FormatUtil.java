@@ -71,7 +71,8 @@ public class FormatUtil {
         }
         Log.i(TAG_FORMATUTIL, "content:  " +content);
         writeTxtToFile(content);
-        deleteFile(videoPath);
+        //delete file
+        //deleteFile(videoPath);
         Log.i(TAG_FORMATUTIL, "data: "+ data[0]);
         return data;
     }

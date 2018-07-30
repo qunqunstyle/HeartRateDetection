@@ -66,7 +66,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.heartratedect.R;
 import com.github.mikephil.charting.animation.Easing;
@@ -93,14 +99,19 @@ public class ResultActivity extends AppCompatActivity implements OnChartGestureL
 
     private TextView unitLabel;
     private TextView heartRateValueLabel;
-    private TextView description;
-    private TextView suggestion;
+    private TextView valueofspo2;
+    private TextView unitLabe2;
     private LineChart lineChart;
+    private EditText remark;
+    private RadioGroup rgSex;
+    private RadioGroup iseat;
+    private RadioGroup issleep;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -108,15 +119,58 @@ public class ResultActivity extends AppCompatActivity implements OnChartGestureL
         float[] bvp= bundle.getFloatArray("data");
 
         unitLabel = (TextView) findViewById(R.id.unitLabel);
+        unitLabe2 = (TextView)  findViewById(R.id.unitLabe2);
+        valueofspo2= (TextView)findViewById(R.id.valueofSpO2);
         heartRateValueLabel= (TextView)findViewById(R.id.heartRateValueLabel);
-        description =(TextView) findViewById(R.id.description);
-        suggestion = (TextView)findViewById(R.id.suggestion);
+        remark = (EditText)findViewById(R.id.remark);
+
+        //remark.clearFocus();
+        iseat = (RadioGroup) findViewById(R.id.iseat);
+        iseat.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // 获取选中的RadioButton的id
+                int id = group.getCheckedRadioButtonId();
+                // 通过id实例化选中的这个RadioButton
+                RadioButton choise = (RadioButton) findViewById(id);
+                // 获取这个RadioButton的text内容
+                String output = choise.getText().toString();
+                Toast.makeText(ResultActivity.this, "你是否在进餐后半小时内进行测量：" + output, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        issleep = (RadioGroup) findViewById(R.id.issleep);
+        issleep.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // 获取选中的RadioButton的id
+                int id = group.getCheckedRadioButtonId();
+                // 通过id实例化选中的这个RadioButton
+                RadioButton choise = (RadioButton) findViewById(id);
+                // 获取这个RadioButton的text内容
+                String output = choise.getText().toString();
+                Toast.makeText(ResultActivity.this, "你是否在睡醒后半小时内进行测量：" + output, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        rgSex = (RadioGroup) findViewById(R.id.rgSex);
+        rgSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // 获取选中的RadioButton的id
+                int id = group.getCheckedRadioButtonId();
+                // 通过id实例化选中的这个RadioButton
+                RadioButton choise = (RadioButton) findViewById(id);
+                // 获取这个RadioButton的text内容
+                String output = choise.getText().toString();
+                Toast.makeText(ResultActivity.this, "你的运动状态为：" + output, Toast.LENGTH_SHORT).show();
+
+            }
+        });
         lineChart = (LineChart) findViewById(R.id.lineChart);
 
-        unitLabel.setText("次/秒");
+        unitLabel.setText("次/分");
         heartRateValueLabel.setText(heartRate);
-        description.setText("您的心率属于健康水平");
-        suggestion.setText("根据大数据分析得，您的心率属于健康水平，请注意保持，并坚持量测");
         // Set listener of the chart.
         lineChart.setOnChartGestureListener(this);
         lineChart.setOnChartValueSelectedListener(this);

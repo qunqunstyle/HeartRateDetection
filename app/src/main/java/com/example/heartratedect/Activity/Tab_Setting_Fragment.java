@@ -109,8 +109,10 @@ public class Tab_Setting_Fragment extends Fragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(getActivity(), "暂未开发，敬请期待", Toast.LENGTH_SHORT)
-						.show();
+				Intent intent1 = new Intent();
+				intent1.setClass(getActivity(), HistoryActivity.class);
+				//getActivity().startActivityForResult(intent,1);
+				startActivity(intent1);
 			}
 		});
 		updateRelativeLayout.setOnClickListener(new OnClickListener() {

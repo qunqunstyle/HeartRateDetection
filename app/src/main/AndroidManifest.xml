@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heartratedect">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -10,18 +11,20 @@
         android:name=".myApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
-        android:label="心率检测"
+        android:label="心动"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
-            <!--<intent-filter>
+            android:screenOrientation="portrait" />
+        <!--
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <activity
             android:name=".Activity.BaseActivity"
             android:screenOrientation="portrait" />
@@ -31,13 +34,12 @@
         <activity
             android:name=".Activity.AboutUsActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activity.TuCaoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.LoginActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,9 +49,10 @@
         <activity
             android:name=".Activity.RegistActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Activity.ResultActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Activity.ResultActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activity.HistoryActivity"></activity>
     </application>
 
 </manifest>

@@ -11,8 +11,8 @@ float perFrame_BVP[MAX_LENGTH];
 HRD::HRD(){
 	
 	levels = 4;
-	fl = 2.1f;
-	fh = 2.8f;
+	fl = 2.00f;
+	fh = 3.00f;
 	fps = 25.0f;
 	heartRate = 0.0f;
 	LENGTH = MAX_LENGTH;
@@ -35,8 +35,14 @@ bool HRD::videoGet(const char*fileName){
 		inputIsOK = false;
 		return inputIsOK;
 	}
+    Mat temp;
+    int index(0);
+    do{
+        capture>>temp;
+        index++;
+    }while(index<20);
 	int sumOfFrames = LENGTH;
-	int index(0);
+    index = 0;
 	do{
 		capture >> frames[index];
 		index++;

@@ -39,10 +39,7 @@ public class Tab_Data_Fragment extends Fragment{
     private TextView heartRateValueLabel;
     private TextView description;
     private TextView suggestion;
-    private TextView suggestion1;
-    private TextView suggestion2;
-    private TextView suggestion3;
-    private TextView suggestion4;
+
     private LineChart lineChart;
 
     @Override
@@ -57,18 +54,14 @@ public class Tab_Data_Fragment extends Fragment{
         heartRateValueLabel= (TextView)dataLayout.findViewById(R.id.heartRateValueLabel);
         description =(TextView)dataLayout. findViewById(R.id.description);
         suggestion = (TextView)dataLayout.findViewById(R.id.suggestion);
-        suggestion1 = (TextView)dataLayout.findViewById(R.id.suggestion1);
-        suggestion2 = (TextView)dataLayout.findViewById(R.id.suggestion2);
-        suggestion3 = (TextView)dataLayout.findViewById(R.id.suggestion3);
-        suggestion4 = (TextView)dataLayout.findViewById(R.id.suggestion4);
+
         lineChart = (LineChart) dataLayout.findViewById(R.id.chart1);
 
-        unitLabel.setText("次/秒");
+        unitLabel.setText("次/分");
         heartRateValueLabel.setText("70 ");
         description.setText("您的心率属于健康水平");
         suggestion.setText("根据大数据分析得，您的心率.........属于健康水平，请注意保持，并坚持量测");
-        suggestion1.setText("根据大数据分析得，您的心率.........属于健康水平，请注意保持，并坚持量测");
-        suggestion2.setText("根据大数据分析得，您的心率.........属于健康水平，请注意保持，并坚持量测");
+
       /*  // Set listener of the chart.
         lineChart.setOnChartGestureListener(getContext());
         lineChart.setOnChartValueSelectedListener(this);
