@@ -7,31 +7,31 @@ JNIEXPORT jfloatArray JNICALL
 Java_com_example_heartratedect_FormatUtil_heartRateDetection(
         JNIEnv *env,
         jobject /* this */,
-        jstring jstring) {
-    // 解析传入的string
-    const char*h264 = env->GetStringUTFChars(jstring, NULL);
+        jstring jString) {
+    // Parse the Java string inputted by the JNI interface.
+    const char*h264 = env->GetStringUTFChars(jString, NULL);
     const char*mjpeg = "/storage/emulated/0/HeartRateDect/video/SucessVideo/MJPEG.avi";
-    // 测试视频地址
+    // The demo video address.
     // const char*test = "/storage/emulated/0/HeartRateDect/video/SucessVideo/Video.avi";
 
-    // 创建jfloatArray数组
-    jboolean jb = JNI_FALSE;//标记JNI数组创建的复制类型为false
-    jfloatArray jfarray = env->NewFloatArray(MAX_LENGTH+1);
-    jfloat *jf = env->GetFloatArrayElements(jfarray,&jb);
-    // 进行视频转码，H264转MJPEG
+    jboolean jb = JNI_FALSE;// Mark the JNI array to create a copy type of false
+    // Create the float array of Java by JNI function.
+    jfloatArray jfArray = env->NewFloatArray(MAX_LENGTH+1);
+    jfloat *jf = env->GetFloatArrayElements(jfArray,&jb);
+    // Perform video transcoding, H264 transcoding MJPEG
     int transCodecFlag = transCodec(h264,mjpeg);
-    // 转码失败，说明视频录制失败，从JNI接口中跳出
+    // Transcoding failed, indicating video recording failed, jumping out of the JNI interface.
     if(transCodecFlag){
         jf[0] = -2.0f;
     }
 
     HRD hrd;
     if(hrd.videoGet(mjpeg)){
-        // 高斯金字塔降采样
+        // Gaussian pyramid drop sampling.
         hrd.gaussPyramid();
-        // 理想带通滤波
+        // Ideal band pass filtering.
         hrd.idealBandPass();
-        // 计算心率值
+        // Calculate the heart rate value and the bvp wave.
         hrd.caculateHRValue();
         jf[0] = hrd.getHRValue();
         for(int index = 1;index<=MAX_LENGTH;index++){
@@ -40,6 +40,6 @@ Java_com_example_heartratedect_FormatUtil_heartRateDetection(
     }else{
         jf[0] = -3.0f;
     }
-    env->ReleaseFloatArrayElements(jfarray,jf,0);
-    return jfarray;
+    env->ReleaseFloatArrayElements(jfArray,jf,0);
+    return jfArray;
 }
